@@ -1,0 +1,300 @@
+{
+	"info": {
+		"_postman_id": "9a4f9d77-e9da-4c5b-bec5-fc32a7bcde89",
+		"name": "Task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22698759"
+	},
+	"item": [
+		{
+			"name": "Account Module",
+			"item": [
+				{
+					"name": "Create account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email_id\": \"joe@gmail.com\",\n    \"account_name\": \"Joe Root\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5050/accounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5050",
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get account by accountName / accountId / secretToken",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5050/accounts?accountName=Joe Root",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5050",
+							"path": [
+								"accounts"
+							],
+							"query": [
+								{
+									"key": "accountId",
+									"value": "ACC-b61a1f907e086d3c",
+									"disabled": true
+								},
+								{
+									"key": "secretToken",
+									"value": "dd74368b9d9aa42f49504cd3950579456815c067a7c511e8a0f01e237480f2e7",
+									"disabled": true
+								},
+								{
+									"key": "accountName",
+									"value": "Joe Root"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Account by accountId",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email_id\": \"sample12344@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5050/accounts/ACC-4c80f9780ed83df3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5050",
+							"path": [
+								"accounts",
+								"ACC-4c80f9780ed83df3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete account by accountId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5050/accounts/ACC-4c80f9780ed83df3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5050",
+							"path": [
+								"accounts",
+								"ACC-4c80f9780ed83df3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Destination Module",
+			"item": [
+				{
+					"name": "Create destinations",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"account_id\": \"ACC-41fbc47110849833\",\n    \"url\": \"https://webhook.site/477526a2-a25d-474f-9558-423883bd3d65\",\n    \"http_method\": \"PUT\",\n    \"headers\": {\n        \"APP_ID\": \"ACC-41fbc47110849833\",\n        \"ACTION\": \"user.update\",\n        \"APP_SECTET\": \"540fda93104771a184998e8c7ae0bb0a6aa395a2c56e4b4c69352552dbd370e9\",\n        \"Content-Type\": \"application/json\",\n        \"Accept\": \"*\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5050/destinations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5050",
+							"path": [
+								"destinations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch destinations by AccountId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5050/destinations/ACC-41fbc47110849833",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5050",
+							"path": [
+								"destinations",
+								"ACC-41fbc47110849833"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete destination by AccountId or destinationID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5050/destinations?id=1ef650c8-6fde-49a8-8fd0-812d9b62ca3f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5050",
+							"path": [
+								"destinations"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1ef650c8-6fde-49a8-8fd0-812d9b62ca3f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update destination by id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"is_deleted\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5050/destinations/id=1ef650c8-6fde-49a8-8fd0-812d9b62ca3f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5050",
+							"path": [
+								"destinations",
+								"id=1ef650c8-6fde-49a8-8fd0-812d9b62ca3f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get destination urls alone by account ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5050/destinations/urls/ACC-41fbc47110849833",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5050",
+							"path": [
+								"destinations",
+								"urls",
+								"ACC-41fbc47110849833"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Incoming data",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CL-X-TOKEN",
+						"value": "46cb1226d99469479888963da4fdba3e43d051b4eb7ff56672d483566d2ece90",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"test\": \"test\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5050/server/incoming_data",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"server",
+						"incoming_data"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
