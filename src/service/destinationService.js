@@ -1,9 +1,15 @@
 const Destination = require("../models/Destinations");
 const { Op } = require("sequelize");
+const BadRequestError = require("../errors/BadRequestError");
+const Account = require("../models/Accounts");
 
 const create = async (data = {}) => {
   const { url, http_method, headers, account_id } = data;
 
+  let accountDetail = (await _getAccountDetail(account_id))?.dataValues;
+  if (!accountDetail) {
+    throw new BadRequestError("Account Id not found!");
+  }
   await Destination.create({
     url,
     http_method,
@@ -59,7 +65,7 @@ const deleteDestination = async (accountId = "", id = "") => {
 
 const updateDestinationById = async (id, data = {}) => {
   const { url, http_method, headers, is_deleted } = data;
-  await Destination.update(
+  const isUpdated = await Destination.update(
     {
       url,
       http_method,
@@ -72,7 +78,20 @@ const updateDestinationById = async (id, data = {}) => {
       },
     }
   );
+  if(!isUpdated[0]) {
+    throw new BadRequestError("Invalid id");
+  }
 };
+
+const _getAccountDetail = async(accountId) => {
+  const data = await Account.findOne({
+    where: {
+      account_id: accountId,
+      is_deleted: false
+    }
+  })
+  return data;
+}
 
 module.exports = {
   create,

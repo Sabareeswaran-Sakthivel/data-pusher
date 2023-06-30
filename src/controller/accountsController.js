@@ -1,6 +1,6 @@
 const {
   create,
-  get,
+  fetchAccount,
   deleteByAccountId,
   updateByAccountId,
 } = require("../service/accountsService");
@@ -23,7 +23,7 @@ const createAccount = async (req, res, next) => {
 
 const getAccount = async (req, res, next) => {
   try {
-    const response = await get(req.query);
+    const response = await fetchAccount(req.query);
 
     res.status(200).send({ success: true, data: response ? [response] : [] });
   } catch (error) {

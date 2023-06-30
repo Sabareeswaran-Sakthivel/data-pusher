@@ -5,7 +5,7 @@ const {
   generateAppSecretToken,
 } = require("../utility/utils");
 const { deleteDestination } = require("./destinationService");
-const BadRequestError = require("../errors/BadRequestError")
+const BadRequestError = require("../errors/BadRequestError");
 
 const create = async (data = {}) => {
   const { email_id, account_name, website = null } = data;
@@ -21,7 +21,7 @@ const create = async (data = {}) => {
   });
 };
 
-const get = async (options = {}) => {
+const fetchAccount = async (options = {}) => {
   const { accountName, accountId, secretToken } = options;
   let query = {};
   if (options.accountName) {
@@ -57,17 +57,15 @@ const get = async (options = {}) => {
 };
 
 const deleteByAccountId = async (accountId) => {
-  const isDeleted = Promise.all(
-    await Account.update(
-      { is_deleted: true },
-      {
-        where: {
-          account_id: accountId,
-        },
-      }
-    ),
-    await deleteDestination(accountId)
+  const isDeleted = await Account.update(
+    { is_deleted: true },
+    {
+      where: {
+        account_id: accountId,
+      },
+    }
   );
+  await deleteDestination(accountId);
   if (!isDeleted[0]) {
     throw new BadRequestError("Account Id not found!");
   }
@@ -76,18 +74,20 @@ const deleteByAccountId = async (accountId) => {
 const updateByAccountId = async (accountId, data = {}) => {
   const { email_id, account_name, website } = data;
   if (data.account_id || data.is_deleted || data.app_secret_token) {
-    throw new ValidationError("account_id, is_deleted_ and app_secret_token can't be updated")
+    throw new ValidationError(
+      "account_id, is_deleted_ and app_secret_token can't be updated"
+    );
   }
   const isUpdated = await Account.update(
     {
       email_id,
       account_name,
-      website
+      website,
     },
     {
       where: {
         account_id: accountId,
-        is_deleted: false
+        is_deleted: false,
       },
     }
   );
@@ -98,7 +98,7 @@ const updateByAccountId = async (accountId, data = {}) => {
 
 module.exports = {
   create,
-  get,
+  fetchAccount,
   deleteByAccountId,
   updateByAccountId,
 };
